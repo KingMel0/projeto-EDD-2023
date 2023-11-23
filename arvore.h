@@ -4,14 +4,14 @@
 #define BINARY_SEARCH_TREE_H
 
 struct TreeNode {
-    int key;                // Valor do nó
+    int chave;                // Valor do nó
     struct TreeNode* left;  // Ponteiro para o filho esquerdo
     struct TreeNode* right; // Ponteiro para o filho direito
 };
 
-struct TreeNode* insert(struct TreeNode* root, int key);
-struct TreeNode* removeNode(struct TreeNode* root, int key);
-int search(struct TreeNode* root, int key);
+struct TreeNode* insert(struct TreeNode* root, int chave);
+struct TreeNode* removeNode(struct TreeNode* root, int chave);
+int search(struct TreeNode* root, int chave);
 void inorderTraversal(struct TreeNode* root);
 void preorderTraversal(struct TreeNode* root);
 void postorderTraversal(struct TreeNode* root);

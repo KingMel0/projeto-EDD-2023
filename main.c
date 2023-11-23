@@ -27,11 +27,11 @@ int main() {
     printf("\n");
 
     // Teste de busca
-    int keyToSearch = 40;
-    if (search(root, keyToSearch)) {
-        printf("%d found in the tree.\n", keyToSearch);
+    int chaveToSearch = 40;
+    if (search(root, chaveToSearch)) {
+        printf("%d found in the tree.\n", chaveToSearch);
     } else {
-        printf("%d not found in the tree.\n", keyToSearch);
+        printf("%d not found in the tree.\n", chaveToSearch);
     }
 
     // Teste de percursos

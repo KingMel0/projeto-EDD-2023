@@ -4,32 +4,32 @@
 #include <stdlib.h>
 #include "arvore.h"
 
-struct TreeNode* insert(struct TreeNode* root, int key) {
+struct TreeNode* insert(struct TreeNode* root, int chave) {
     if (root == NULL) {
         struct TreeNode* newNode = (struct TreeNode*)malloc(sizeof(struct TreeNode));
-        newNode->key = key;
+        newNode->chave = chave;
         newNode->left = newNode->right = NULL;
         return newNode;
     }
 
-    if (key < root->key) {
-        root->left = insert(root->left, key);
-    } else if (key > root->key) {
-        root->right = insert(root->right, key);
+    if (chave < root->chave) {
+        root->left = insert(root->left, chave);
+    } else if (chave > root->chave) {
+        root->right = insert(root->right, chave);
     }
 
     return root;
 }
 
-struct TreeNode* removeNode(struct TreeNode* root, int key) {
+struct TreeNode* removeNode(struct TreeNode* root, int chave) {
     if (root == NULL) {
         return root;
     }
 
-    if (key < root->key) {
-        root->left = removeNode(root->left, key);
-    } else if (key > root->key) {
-        root->right = removeNode(root->right, key);
+    if (chave < root->chave) {
+        root->left = removeNode(root->left, chave);
+    } else if (chave > root->chave) {
+        root->right = removeNode(root->right, chave);
     } else {
         if (root->left == NULL) {
             struct TreeNode* temp = root->right;
@@ -46,38 +46,38 @@ struct TreeNode* removeNode(struct TreeNode* root, int key) {
             temp = temp->left;
         }
 
-        root->key = temp->key;
-        root->right = removeNode(root->right, temp->key);
+        root->chave = temp->chave;
+        root->right = removeNode(root->right, temp->chave);
     }
 
     return root;
 }
 
-int search(struct TreeNode* root, int key) {
+int search(struct TreeNode* root, int chave) {
     if (root == NULL) {
         return 0;
     }
 
-    if (key == root->key) {
+    if (chave == root->chave) {
         return 1;
-    } else if (key < root->key) {
-        return search(root->left, key);
+    } else if (chave < root->chave) {
+        return search(root->left, chave);
     } else {
-        return search(root->right, key);
+        return search(root->right, chave);
     }
 }
 
 void inorderTraversal(struct TreeNode* root) {
     if (root != NULL) {
         inorderTraversal(root->left);
-        printf("%d ", root->key);
+        printf("%d ", root->chave);
         inorderTraversal(root->right);
     }
 }
 
 void preorderTraversal(struct TreeNode* root) {
     if (root != NULL) {
-        printf("%d ", root->key);
+        printf("%d ", root->chave);
         preorderTraversal(root->left);
         preorderTraversal(root->right);
     }
@@ -87,7 +87,7 @@ void postorderTraversal(struct TreeNode* root) {
     if (root != NULL) {
         postorderTraversal(root->left);
         postorderTraversal(root->right);
-        printf("%d ", root->key);
+        printf("%d ", root->chave);
     }
 }
 
@@ -101,7 +101,7 @@ int findMin(struct TreeNode* root) {
         root = root->left;
     }
 
-    return root->key;
+    return root->chave;
 }
 
 int findMax(struct TreeNode* root) {
@@ -114,7 +114,7 @@ int findMax(struct TreeNode* root) {
         root = root->right;
     }
 
-    return root->key;
+    return root->chave;
 }
 
 void freeTree(struct TreeNode* root) {
