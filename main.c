@@ -39,9 +39,9 @@ int main() {
 
     int buscarNumero = 40;
     if (buscar(raiz, buscarNumero)) {
-        printf("%d encontrado na árvore.\n", buscarNumero);
+        printf("%d foi achado.\n", buscarNumero);
     } else {
-        printf("%d não encontrado na árvore.\n", buscarNumero);
+        printf("%d nao foi achado.\n", buscarNumero);
     }
 
     printf("Inorder traversal: ");
