@@ -1,58 +1,71 @@
-// main.c
-
 #include <stdio.h>
+#include <stdlib.h>
 #include "arvore.h"
 
+void imprimirValores(struct NoArvore* raiz) {
+    if (raiz != NULL) {
+        imprimirValores(raiz->esquerda);
+        printf("%d ", raiz->chave);
+        imprimirValores(raiz->direita);
+    }
+}
+
 int main() {
-    struct TreeNode* root = NULL;
+    struct NoArvore* raiz = NULL;
 
-    // Teste de inserção
-    root = insert(root, 50);
-    insert(root, 30);
-    insert(root, 20);
-    insert(root, 40);
-    insert(root, 70);
-    insert(root, 60);
-    insert(root, 80);
+    raiz = adicionar(raiz, 50);
+    adicionar(raiz, 30);
+    adicionar(raiz, 20);
+    adicionar(raiz, 25);
+    adicionar(raiz, 70);
+    adicionar(raiz, 60);
+    adicionar(raiz, 80);
+    adicionar(raiz, 234);
+    adicionar(raiz, 2321);
 
-    // Teste de remoção
-    printf("Inorder traversal before deletion: ");
-    inorderTraversal(root);
+    printf("Valores após adição: ");
+    imprimirValores(raiz);
     printf("\n");
 
-    root = removeNode(root, 20);
+    printf("Inorder traversal before deletion: ");
+    emOrdem(raiz);
+    printf("\n");
+
+    raiz = remover(raiz, 20);
 
     printf("Inorder traversal after deletion: ");
-    inorderTraversal(root);
+    emOrdem(raiz);
     printf("\n");
 
-    // Teste de busca
-    int chaveToSearch = 40;
-    if (search(root, chaveToSearch)) {
-        printf("%d found in the tree.\n", chaveToSearch);
+    int buscarNumero = 40;
+    if (buscar(raiz, buscarNumero)) {
+        printf("%d encontrado na árvore.\n", buscarNumero);
     } else {
-        printf("%d not found in the tree.\n", chaveToSearch);
+        printf("%d não encontrado na árvore.\n", buscarNumero);
     }
 
-    // Teste de percursos
     printf("Inorder traversal: ");
-    inorderTraversal(root);
+    emOrdem(raiz);
     printf("\n");
 
     printf("Preorder traversal: ");
-    preorderTraversal(root);
+    preOrdem(raiz);
     printf("\n");
 
     printf("Postorder traversal: ");
-    postorderTraversal(root);
+    posOrdem(raiz);
     printf("\n");
 
-    // Teste de mínimo e máximo
-    printf("Minimum value in the tree: %d\n", findMin(root));
-    printf("Maximum value in the tree: %d\n", findMax(root));
+    printf("Minimum value in the arvore: %d\n", valorMin(raiz));
+    printf("Maximum value in the arvore: %d\n", valorMax(raiz));
 
-    // Liberação de memória
-    freeTree(root);
+    liberarArvore(&raiz);
+
+    if (raiz == NULL) {
+        printf("A árvore foi liberada com sucesso.\n");
+    } else {
+        printf("Erro ao liberar a árvore.\n");
+    }
 
     return 0;
 }

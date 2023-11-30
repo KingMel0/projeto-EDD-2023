@@ -1,126 +1,127 @@
-// binary_search_tree.c
+// binary_buscar_arvore.c
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "arvore.h"
 
-struct TreeNode* insert(struct TreeNode* root, int chave) {
-    if (root == NULL) {
-        struct TreeNode* newNode = (struct TreeNode*)malloc(sizeof(struct TreeNode));
-        newNode->chave = chave;
-        newNode->left = newNode->right = NULL;
-        return newNode;
+struct NoArvore* adicionar(struct NoArvore* raiz, int chave) {
+    if (raiz == NULL) {
+        struct NoArvore* novoNo = (struct NoArvore*)malloc(sizeof(struct NoArvore));
+        novoNo->chave = chave;
+        novoNo->esquerda = novoNo->direita = NULL;
+        return novoNo;
+    }
+    if (chave < raiz->chave) {
+        raiz->esquerda = adicionar(raiz->esquerda, chave);
+    } else if (chave > raiz->chave) {
+        raiz->direita = adicionar(raiz->direita, chave);
     }
 
-    if (chave < root->chave) {
-        root->left = insert(root->left, chave);
-    } else if (chave > root->chave) {
-        root->right = insert(root->right, chave);
-    }
-
-    return root;
+    return raiz;
 }
 
-struct TreeNode* removeNode(struct TreeNode* root, int chave) {
-    if (root == NULL) {
-        return root;
+struct NoArvore* remover(struct NoArvore* raiz, int chave) {
+    if (raiz == NULL) {
+        return raiz;
     }
 
-    if (chave < root->chave) {
-        root->left = removeNode(root->left, chave);
-    } else if (chave > root->chave) {
-        root->right = removeNode(root->right, chave);
+    if (chave < raiz->chave) {
+        raiz->esquerda = remover(raiz->esquerda, chave);
+    } else if (chave > raiz->chave) {
+        raiz->direita = remover(raiz->direita, chave);
     } else {
-        if (root->left == NULL) {
-            struct TreeNode* temp = root->right;
-            free(root);
+        if (raiz->esquerda == NULL) {
+            struct NoArvore* temp = raiz->direita;
+            free(raiz);
             return temp;
-        } else if (root->right == NULL) {
-            struct TreeNode* temp = root->left;
-            free(root);
+        } else if (raiz->direita == NULL) {
+            struct NoArvore* temp = raiz->esquerda;
+            free(raiz);
             return temp;
         }
 
-        struct TreeNode* temp = root->right;
-        while (temp->left != NULL) {
-            temp = temp->left;
+        struct NoArvore* temp = raiz->direita;
+        while (temp->esquerda != NULL) {
+            temp = temp->esquerda;
         }
 
-        root->chave = temp->chave;
-        root->right = removeNode(root->right, temp->chave);
+        raiz->chave = temp->chave;
+        raiz->direita = remover(raiz->direita, temp->chave);
     }
 
-    return root;
+    return raiz;
 }
 
-int search(struct TreeNode* root, int chave) {
-    if (root == NULL) {
+int buscar(struct NoArvore* raiz, int chave) {
+    if (raiz == NULL) {
         return 0;
     }
 
-    if (chave == root->chave) {
+    if (chave == raiz->chave) {
         return 1;
-    } else if (chave < root->chave) {
-        return search(root->left, chave);
+    } else if (chave < raiz->chave) {
+        return buscar(raiz->esquerda, chave);
     } else {
-        return search(root->right, chave);
+        return buscar(raiz->direita, chave);
     }
 }
 
-void inorderTraversal(struct TreeNode* root) {
-    if (root != NULL) {
-        inorderTraversal(root->left);
-        printf("%d ", root->chave);
-        inorderTraversal(root->right);
+void emOrdem(struct NoArvore* raiz) {
+    if (raiz != NULL) {
+        emOrdem(raiz->esquerda);
+        printf("%d ", raiz->chave);
+        emOrdem(raiz->direita);
     }
 }
 
-void preorderTraversal(struct TreeNode* root) {
-    if (root != NULL) {
-        printf("%d ", root->chave);
-        preorderTraversal(root->left);
-        preorderTraversal(root->right);
+void preOrdem(struct NoArvore* raiz) {
+    if (raiz != NULL) {
+        printf("%d ", raiz->chave);
+        preOrdem(raiz->esquerda);
+        preOrdem(raiz->direita);
     }
 }
 
-void postorderTraversal(struct TreeNode* root) {
-    if (root != NULL) {
-        postorderTraversal(root->left);
-        postorderTraversal(root->right);
-        printf("%d ", root->chave);
+void posOrdem(struct NoArvore* raiz) {
+    if (raiz != NULL) {
+        posOrdem(raiz->esquerda);
+        posOrdem(raiz->direita);
+        printf("%d ", raiz->chave);
     }
 }
 
-int findMin(struct TreeNode* root) {
-    if (root == NULL) {
-        fprintf(stderr, "Empty tree\n");
+int valorMin(struct NoArvore* raiz) {
+    if (raiz == NULL) {
+        fprintf(stderr, "Empty arvore\n");
         exit(EXIT_FAILURE);
     }
 
-    while (root->left != NULL) {
-        root = root->left;
+    while (raiz->esquerda != NULL) {
+        raiz = raiz->esquerda;
     }
 
-    return root->chave;
+    return raiz->chave;
 }
 
-int findMax(struct TreeNode* root) {
-    if (root == NULL) {
-        fprintf(stderr, "Empty tree\n");
+int valorMax(struct NoArvore* raiz) {
+    if (raiz == NULL) {
+        fprintf(stderr, "Empty arvore\n");
         exit(EXIT_FAILURE);
     }
 
-    while (root->right != NULL) {
-        root = root->right;
+    while (raiz->direita != NULL) {
+        raiz = raiz->direita;
     }
 
-    return root->chave;
+    return raiz->chave;
 }
 
-void freeTree(struct TreeNode* root) {
-    if (root != NULL) {
-        freeTree(root->left);
-        freeTree(root->right);
-        free(root);
+void liberarArvore(struct NoArvore** raiz) {
+    if (*raiz != NULL) {
+        liberarArvore(&((*raiz)->esquerda));
+        liberarArvore(&((*raiz)->direita));
+        free(*raiz);
+        *raiz = NULL;  
     }
 }
+

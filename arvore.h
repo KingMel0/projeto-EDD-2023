@@ -1,22 +1,22 @@
-// binary_search_tree.h
+// arvore.h
 
-#ifndef BINARY_SEARCH_TREE_H
-#define BINARY_SEARCH_TREE_H
+#ifndef ARVORE_H
+#define ARVORE_H
 
-struct TreeNode {
-    int chave;                // Valor do nó
-    struct TreeNode* left;  // Ponteiro para o filho esquerdo
-    struct TreeNode* right; // Ponteiro para o filho direito
+struct NoArvore {
+    int chave;                 // Valor do nó
+    struct NoArvore* esquerda;  // Ponteiro para o filho esquerdo
+    struct NoArvore* direita;   // Ponteiro para o filho direito
 };
 
-struct TreeNode* insert(struct TreeNode* root, int chave);
-struct TreeNode* removeNode(struct TreeNode* root, int chave);
-int search(struct TreeNode* root, int chave);
-void inorderTraversal(struct TreeNode* root);
-void preorderTraversal(struct TreeNode* root);
-void postorderTraversal(struct TreeNode* root);
-int findMin(struct TreeNode* root);
-int findMax(struct TreeNode* root);
-void freeTree(struct TreeNode* root);
+struct NoArvore* adicionar(struct NoArvore* raiz, int chave);
+struct NoArvore* remover(struct NoArvore* raiz, int chave);
+int buscar(struct NoArvore* raiz, int chave);
+void emOrdem(struct NoArvore* raiz);
+void preOrdem(struct NoArvore* raiz);
+void posOrdem(struct NoArvore* raiz);
+int valorMin(struct NoArvore* raiz);
+int valorMax(struct NoArvore* raiz);
+void liberarArvore(struct NoArvore** raiz);
 
-#endif // BINARY_SEARCH_TREE_H
+#endif // ARVORE_H
