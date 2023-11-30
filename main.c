@@ -23,17 +23,17 @@ int main() {
     adicionar(raiz, 234);
     adicionar(raiz, 2321);
 
-    printf("Valores após adição: ");
+    printf("Valores depois da adicao: ");
     imprimirValores(raiz);
     printf("\n");
 
-    printf("Inorder traversal before deletion: ");
+    printf("Valores em ordem: ");
     emOrdem(raiz);
     printf("\n");
 
     raiz = remover(raiz, 20);
 
-    printf("Inorder traversal after deletion: ");
+    printf("Valores em ordem depois da remocao: ");
     emOrdem(raiz);
     printf("\n");
 
