@@ -1,12 +1,10 @@
-// arvore.h
-
 #ifndef ARVORE_H
 #define ARVORE_H
 
 struct NoArvore {
-    int chave;                 // Valor do nó
-    struct NoArvore* esquerda;  // Ponteiro para o filho esquerdo
-    struct NoArvore* direita;   // Ponteiro para o filho direito
+    int chave;                 
+    struct NoArvore* esquerda;  
+    struct NoArvore* direita;   
 };
 
 struct NoArvore* adicionar(struct NoArvore* raiz, int chave);
@@ -19,4 +17,4 @@ int valorMin(struct NoArvore* raiz);
 int valorMax(struct NoArvore* raiz);
 void liberarArvore(struct NoArvore** raiz);
 
-#endif // ARVORE_H
+#endif 

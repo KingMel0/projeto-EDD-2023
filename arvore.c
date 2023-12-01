@@ -1,5 +1,3 @@
-// binary_buscar_arvore.c
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "arvore.h"
@@ -92,7 +90,7 @@ void posOrdem(struct NoArvore* raiz) {
 
 int valorMin(struct NoArvore* raiz) {
     if (raiz == NULL) {
-        fprintf(stderr, "Empty arvore\n");
+        fprintf(stderr, "\n");
         exit(EXIT_FAILURE);
     }
 
@@ -105,7 +103,7 @@ int valorMin(struct NoArvore* raiz) {
 
 int valorMax(struct NoArvore* raiz) {
     if (raiz == NULL) {
-        fprintf(stderr, "Empty arvore\n");
+        fprintf(stderr, "Arvore vazia\n");
         exit(EXIT_FAILURE);
     }
 

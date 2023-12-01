@@ -44,27 +44,27 @@ int main() {
         printf("%d nao foi achado.\n", buscarNumero);
     }
 
-    printf("Inorder traversal: ");
+    printf("Travessia em ordem: ");
     emOrdem(raiz);
     printf("\n");
 
-    printf("Preorder traversal: ");
+    printf("Travessia Pre-ordem: ");
     preOrdem(raiz);
     printf("\n");
 
-    printf("Postorder traversal: ");
+    printf("Travessia pos-ordem: ");
     posOrdem(raiz);
     printf("\n");
 
-    printf("Minimum value in the arvore: %d\n", valorMin(raiz));
-    printf("Maximum value in the arvore: %d\n", valorMax(raiz));
+    printf("Valor minimo na arvore: %d\n", valorMin(raiz));
+    printf("Valor maximo na arvore: %d\n", valorMax(raiz));
 
     liberarArvore(&raiz);
 
     if (raiz == NULL) {
-        printf("A árvore foi liberada com sucesso.\n");
+        printf("A arvore foi liberada com sucesso.\n");
     } else {
-        printf("Erro ao liberar a árvore.\n");
+        printf("Erro ao liberar a arvore.\n");
     }
 
     return 0;
